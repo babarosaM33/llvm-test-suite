@@ -43,7 +43,6 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#include <sys/timeb.h>
 #include "global.h"
 
 #include "configfile.h"

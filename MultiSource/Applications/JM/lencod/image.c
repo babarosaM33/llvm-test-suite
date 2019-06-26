@@ -29,7 +29,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-#include <sys/timeb.h>
 #include <string.h>
 #include <memory.h>
 #include <assert.h>
@@ -51,7 +50,7 @@
 #include "output.h"
 #include "cabac.h"
 
-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__APPLE__)
+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__APPLE__) || defined(__ANDROID__)
 #include <sys/time.h>
 int ftime(struct timeb *tp)
 { 

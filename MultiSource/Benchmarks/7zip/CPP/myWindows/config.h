@@ -25,7 +25,9 @@
   #endif /* !ENV_MACOSX && !ENV_BEOS */
 
   #if !defined(ENV_BEOS)
-    #define ENV_HAVE_GETPASS
+    #if !defined(__ANDROID__)
+      #define ENV_HAVE_GETPASS
+    #endif
 
     #if !defined(sun)
       #define ENV_HAVE_TIMEGM

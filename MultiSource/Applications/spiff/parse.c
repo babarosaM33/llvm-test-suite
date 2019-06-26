@@ -69,9 +69,6 @@ static int
 _P_in_alpha(chr)
 char chr;
 {
-#ifndef ATT
-	extern char *index(const char *s, int c);
-#endif
 	/*
 	**	special case when string terminator
 	**	is handed to us
@@ -79,11 +76,7 @@ char chr;
 	if ('\0' == chr)
 		return(0);
 
-#ifdef ATT
 	return((int) strchr(_P_alpha,chr));
-#else
-	return((int) index(_P_alpha,chr));
-#endif
 }
 
 void

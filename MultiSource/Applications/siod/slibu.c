@@ -1787,7 +1787,7 @@ LISP rld_pathnames(void)
  return(nreverse(result));}
 #endif
 
-#ifdef unix
+#if defined(unix) && !defined(__ANDROID__)
 LISP lgetpass(LISP lprompt)
 {long iflag;
  char *result;
@@ -2284,7 +2284,9 @@ void __stdcall init_slibu(void)
 #endif
 #ifdef unix
  init_subr_2("strftime",lstrftime);
+#if !defined(__ANDROID__)
  init_subr_1("getpass",lgetpass);
+#endif
  init_subr_0("pipe",lpipe);
  init_subr_2("alarm",lalarm);
 #endif

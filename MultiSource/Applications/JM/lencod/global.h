@@ -30,6 +30,9 @@
 
 #include <stdio.h>
 #include <time.h>
+#ifndef __ANDROID__
+#include <sys/timeb.h>
+#endif
 
 #include "win32.h"
 #include "defines.h"
@@ -38,6 +41,16 @@
 #include "q_offsets.h"
 #include "minmax.h"
 #include "ifunctions.h"
+
+#ifdef __ANDROID__
+struct timeb {
+  time_t time;
+  unsigned short millitm;
+  short timezone;
+  short dstflag;
+};
+int ftime(struct timeb *tp);
+#endif
 
 /***********************************************************************
  * T y p e    d e f i n i t i o n s    f o r    T M L

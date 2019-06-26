@@ -28,7 +28,6 @@
 #include <limits.h>
 #include <string.h>
 #include <time.h>
-#include <sys/timeb.h>
 
 #include "global.h"
 

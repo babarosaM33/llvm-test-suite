@@ -269,20 +269,20 @@ int main (argc, argv)
     p = getenv ("DICTIONARY");
     if (p != NULL)
 	{
-	if (index (p, '/') != NULL)
+	if (strchr (p, '/') != NULL)
 	    (void) strcpy (hashname, p);
 	else
 	    (void) sprintf (hashname, "%s/%s", LIBDIR, p);
 	(void) strcpy (libdictname, p);
-	p = rindex (p, '.');
+	p = strrchr (p, '.');
 	if (p == NULL  ||  strcmp (p, HASHSUFFIX) != 0)
 	    (void) strcat (hashname, HASHSUFFIX);
-	LibDict = rindex (libdictname, '/');
+	LibDict = strrchr (libdictname, '/');
 	if (LibDict != NULL)
 	    LibDict++;
 	else
 	    LibDict = libdictname;
-	p = rindex (libdictname, '.');
+	p = strrchr (libdictname, '.');
 	if (p != NULL)
 	    *p = '\0';
 	}
@@ -657,20 +657,20 @@ int main (argc, argv)
 			usage ();
 		    p = *argv;
 		    }
-		if (index (p, '/') != NULL)
+		if (strchr (p, '/') != NULL)
 		    (void) strcpy (hashname, p);
 		else
 		    (void) sprintf (hashname, "%s/%s", LIBDIR, p);
 		if (cpd == NULL  &&  *p != '\0')
 		    LibDict = p;
-		p = rindex (p, '.');
+		p = strrchr (p, '.');
 		if (p != NULL  &&  strcmp (p, HASHSUFFIX) == 0)
 		    *p = '\0';	/* Don't want ext. in LibDict */
 		else
 		    (void) strcat (hashname, HASHSUFFIX);
 		if (LibDict != NULL)
 		    {
-		    p = rindex (LibDict, '/');
+		    p = strrchr (LibDict, '/');
 		    if (p != NULL)
 			LibDict = p + 1;
 		    }
@@ -758,7 +758,7 @@ int main (argc, argv)
 	{
 	(void) strcpy (libdictname, DEFHASH);
 	LibDict = libdictname;
-	p = rindex (libdictname, '.');
+	p = strrchr (libdictname, '.');
 	if (p != NULL  &&  strcmp (p, HASHSUFFIX) == 0)
 	    *p = '\0';	/* Don't want ext. in LibDict */
 	}
@@ -815,7 +815,7 @@ static void dofile (filename)
     tflag = deftflag;
     if (tflag < 0)
 	tflag =
-	  (cp = rindex (filename, '.')) != NULL  &&  strcmp (cp, ".tex") == 0;
+	  (cp = strrchr (filename, '.')) != NULL  &&  strcmp (cp, ".tex") == 0;
 
     if (prefstringchar < 0)
 	{
@@ -888,7 +888,7 @@ static void update_file (filename, statbuf)
     bakfile[sizeof bakfile - 1] = '\0';
     if (strcmp(BAKEXT, filename + strlen(filename) - sizeof BAKEXT - 1) != 0)
 	{
-	pathtail = rindex (bakfile, '/');
+	pathtail = strrchr (bakfile, '/');
 	if (pathtail == NULL)
 	    pathtail = bakfile;
 	else
@@ -902,7 +902,7 @@ static void update_file (filename, statbuf)
       filename, BAKEXT);
 #endif
 
-    pathtail = rindex (bakfile, '/');
+    pathtail = strrchr (bakfile, '/');
     if (pathtail == NULL)
 	pathtail = bakfile;
     else
@@ -960,7 +960,7 @@ static void expandmode (option)
 	if (buf[rootlength - 1] == '\n')
 	  buf[--rootlength] = '\0';
 	(void) strcpy (origbuf, buf);
-	if ((flagp = index (buf, hashheader.flagmarker)) != NULL)
+	if ((flagp = strchr (buf, hashheader.flagmarker)) != NULL)
 	    {
 	    rootlength = flagp - buf;
 	    *flagp++ = '\0';

@@ -60,7 +60,7 @@
 pthread_mutex_t logg_mutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
-#ifdef  C_LINUX
+#if  defined(C_LINUX) && !defined(__ANDROID__)
 #include <libintl.h>
 #include <locale.h>
 

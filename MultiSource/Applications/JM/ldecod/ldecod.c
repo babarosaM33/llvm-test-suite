@@ -42,7 +42,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include <sys/timeb.h>
 
 #if defined WIN32
   #include <io.h>

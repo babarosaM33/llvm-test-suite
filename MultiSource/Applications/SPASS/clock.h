@@ -49,7 +49,9 @@
 
 #include "misc.h"
 #include <sys/types.h>
+#ifndef CLOCK_NO_TIMING
 #include <sys/timeb.h>
+#endif
 
 typedef enum {
   clock_BACKTRACK,

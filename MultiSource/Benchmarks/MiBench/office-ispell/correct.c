@@ -1354,8 +1354,8 @@ static void save_root_cap (word, pattern, prestrip, preadd, sufstrip, sufadd,
 		{
 		/* Followcase is the tough one. */
 		p = strtosichar (dent->word, 1);
-		(void) bcopy ((char *) (p + prestrip),
-		  (char *) (newword + preadd),
+		(void) memmove ((char *) (newword + preadd),
+                  (char *) (p + prestrip),
 		  (len - prestrip - sufstrip) * sizeof (ichar_t));
 		if (myupper (p[prestrip]))
 		    {

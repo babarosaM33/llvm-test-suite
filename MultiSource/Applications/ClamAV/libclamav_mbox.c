@@ -4198,7 +4198,7 @@ getURL(struct arg *arg)
 			return NULL;
 		}
 		tcp = proto->p_proto;
-#ifndef	C_WINDOWS
+#if !defined(C_WINDOWS) && !defined(__ANDROID__)
 		endprotoent();
 #endif
 	}

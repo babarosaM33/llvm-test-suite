@@ -79,6 +79,10 @@ int ntz8(unsigned x) {
 #define ffsl ffs64
 #endif
 
+#if defined(__ANDROID__)
+#define ffsl __builtin_ffsl
+#endif
+
 int i;
 int main(void) {
   long long l;

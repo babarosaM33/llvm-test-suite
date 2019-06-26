@@ -23,7 +23,7 @@
  */
 
 #include <stdlib.h>	/* free(), malloc() */
-#include <string.h>	/* bcopy() */
+#include <strings.h>	/* bcopy() */
 #include "patricia.h"
 
 

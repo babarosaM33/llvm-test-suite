@@ -21,6 +21,7 @@ notice and this notice must be preserved on all copies.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include "machine.h"
 #include "new.h"
 #include "files.h"

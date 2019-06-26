@@ -144,7 +144,7 @@ int makedent (lbuf, lbuflen, d)
     d->flagfield |= USED;
     d->flagfield &= ~KEEP;
 
-    p = index (lbuf, hashheader.flagmarker);
+    p = strchr (lbuf, hashheader.flagmarker);
     if (p != NULL)
 	*p = 0;
 

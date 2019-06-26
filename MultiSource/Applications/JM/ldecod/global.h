@@ -30,12 +30,23 @@
 #include <stdarg.h>
 
 #include <time.h>
+#ifndef __ANDROID__
 #include <sys/timeb.h>
+#endif
 #include "win32.h"
 #include "defines.h"
 #include "ifunctions.h"
 #include "parsetcommon.h"
 
+#ifdef __ANDROID__
+struct timeb {
+  time_t time;
+  unsigned short millitm;
+  short timezone;
+  short dstflag;
+};
+int ftime(struct timeb *tp);
+#endif
 
 typedef unsigned char  byte;                     //!<  8 bit unsigned
 typedef unsigned short imgpel;                  //!<  Pixel type definition (16 bit for FRExt)
