@@ -1,0 +1,5 @@
+set(ANDROID_NDK_PATH "" CACHE FILEPATH "")
+set(TARGET_CFLAGS "--target=${ANDROID_TARGET_TRIPLE} --sysroot=${ANDROID_NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/sysroot -B${ANDROID_NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64 -fuse-ld=lld ${ANDROID_CFLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_CFLAGS}" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TARGET_CFLAGS} -static-libstdc++" CACHE STRING "" FORCE)
+set(TEST_SUITE_CXX_ABI "libc++_static" CACHE STRING "")
