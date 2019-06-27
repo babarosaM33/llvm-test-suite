@@ -2,15 +2,19 @@ from litsupport import shellcommand
 from litsupport import testplan
 import os
 import re
-
+try:
+        from shlex import quote  # python 3.3 and above
+except ImportError:
+        from pipes import quote  # python 3.2 and earlier
 
 def _mutateCommandLine(context, commandline):
     timefile = context.tmpBase + ".time"
     config = context.config
     cmd = shellcommand.parse(commandline)
+    outfile = None
 
-    timeit = "%s/tools/timeit-target" % config.test_source_root
-    args = ["--limit-core", "0"]
+    args = ["%s/tools/timeit-target" % config.test_source_root]
+    args += ["--limit-core", "0"]
     args += ["--limit-cpu", "7200"]
     args += ["--timeout", "7200"]
     args += ["--limit-file-size", "104857600"]
@@ -50,10 +54,26 @@ def _mutateCommandLine(context, commandline):
     args += ["--summary", timefile]
     # Remember timefilename for later
     context.timefiles.append(timefile)
+    cmd.wrap(args[0], args[1:])
 
-    cmd.wrap(timeit, args)
+    if 1:
+        def to_device(arg):
+            return arg.replace(config.test_source_root, '/data/local/tmp/llvm-test-suite/staging')
+
+        cmd.executable = to_device(cmd.executable)
+        cmd.arguments = [to_device(arg) for arg in cmd.arguments]
+        c = cmd.toCommandline()
+
+        c = 'mkdir -p ' + quote(to_device(os.path.dirname(context.tmpBase))) + ' && ' + c
+        c = ' '.join(['adb', 'shell', quote(c)])
+
+        files = [timefile]
+        if outfile:
+            files += [outfile]
+        c += ' && adb pull ' + ' '.join([quote(to_device(file)) for file in files]) + ' ' + quote(os.path.dirname(context.tmpBase))
+        return c
+    
     return cmd.toCommandline()
-
 
 def _mutateScript(context, script):
     if not hasattr(context, "timefiles"):

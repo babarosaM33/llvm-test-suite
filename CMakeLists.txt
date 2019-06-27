@@ -220,7 +220,7 @@ mark_as_advanced(TEST_SUITE_LIT)
 
 add_subdirectory(tools)
 # Shortcut for the path to the fpcmp executable
-set(FPCMP ${CMAKE_BINARY_DIR}/tools/fpcmp)
+set(FPCMP ${CMAKE_BINARY_DIR}/tools/fpcmp-host)
 
 option(TEST_SUITE_COLLECT_COMPILE_TIME
        "Measure compile time by wrapping compiler invocations in timeit" ON)

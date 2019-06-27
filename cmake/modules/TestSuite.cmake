@@ -97,6 +97,7 @@ endfunction()
 function(test_suite_add_build_dependencies target)
   add_dependencies(${target}
     build-HashProgramOutput.sh
+    build-fpcmp-host
     build-timeit
     build-timeit-target
     fpcmp
